@@ -175,6 +175,23 @@ h1 .l2{display:block;font-size:clamp(4rem,min(12.6vw,15vh),11rem);color:var(--go
 .lb-prev{inset-inline-start:18px}.lb-next{inset-inline-end:18px}
 @media (max-width:640px){.gallery{columns:2}.lb-nav{width:44px;height:44px;bottom:24px;top:auto;transform:none}}
 
+/* ---------- info & guidelines ---------- */
+.info{color:var(--navy);
+  background:radial-gradient(70% 50% at 50% 0%, #fffdf6 0%, rgba(255,253,246,0) 70%), var(--cream);
+  padding-block:clamp(44px,5.5vw,80px) clamp(52px,6vw,92px)}
+.info-head{text-align:center;margin-bottom:clamp(24px,3vw,40px)}
+.info-head h2{font:700 clamp(2.6rem,5vw,4rem)/.95 var(--display);color:var(--navy)}
+.info-head h2 span{color:#b9770e}
+.rules{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(10px,1.2vw,16px);max-width:980px;margin-inline:auto}
+.rules li{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:18px;
+  background:#fff;border:1px solid rgba(18,50,102,.08);box-shadow:0 12px 26px -18px rgba(18,50,102,.35);
+  font:500 clamp(1rem,1.35vw,1.1rem)/1.5 var(--body);color:#33466e;text-wrap:pretty}
+.rules .ic{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(180deg,#ffe08f,var(--gold) 45%,var(--gold-2));color:var(--navy);
+  box-shadow:0 6px 14px -6px rgba(185,119,14,.55)}
+.rules .ic svg{width:24px;height:24px}
+@media (max-width:760px){.rules{grid-template-columns:1fr}.rules li{padding:14px 16px;gap:14px}.rules .ic{width:42px;height:42px}}
+
 footer{background:#040c1f;border-top:1px solid rgba(255,211,115,.28);padding:34px 0 calc(116px + env(safe-area-inset-bottom))}
 .foot{display:flex;align-items:center;justify-content:center;gap:clamp(24px,5vw,64px);flex-wrap:wrap}
 .foot .partners{margin:0;width:min(300px,70vw)}
@@ -207,6 +224,8 @@ footer{background:#040c1f;border-top:1px solid rgba(255,211,115,.28);padding:34p
   .rv .gal-head::before, .rv .gal-head::after{transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.75,.2,1) .15s}
   .rv .gal-head::before{transform-origin:left}.rv .gal-head::after{transform-origin:right}
   .rv .gal-head h2{opacity:0;transform:translateY(24px) scale(.9)}
+  .rv .info-head, .rv .rules li{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .9s cubic-bezier(.2,.75,.2,1);transition-delay:var(--d,0s)}
+  .rv .info-head.in, .rv .rules li.in{opacity:1;transform:none}
   .rv .gallery li{opacity:0;transform:translateY(44px) scale(.92);filter:blur(8px)}
   .rv .sec-title > .in, .rv .sec-title h2.in, .rv .act.in, .rv .act.in img, .rv .act.in h3, .rv .act.in p,
   .rv .gal-head.in h2, .rv .gallery li.in{opacity:1;transform:none;filter:none}
@@ -269,7 +288,15 @@ footer{background:#040c1f;border-top:1px solid rgba(255,211,115,.28);padding:34p
   <symbol id="i-nav" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="currentColor"/></symbol>
   <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-tk" viewBox="0 0 100 100"><g transform="rotate(-12 50 50)"><path d="M8 26H92V42A9 9 0 0 0 92 60V76H8V60A9 9 0 0 0 8 42Z" fill="currentColor"/><path d="M64 30V72" stroke="#ffd373" stroke-width="6" stroke-dasharray="7 6"/></g></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="r-time" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></g></symbol>
+  <symbol id="r-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></g></symbol>
+  <symbol id="r-ban" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></g></symbol>
+  <symbol id="r-paw" viewBox="0 0 24 24"><g fill="currentColor"><ellipse cx="7" cy="10" rx="1.8" ry="2.3"/><ellipse cx="10.5" cy="6.8" rx="1.8" ry="2.3"/><ellipse cx="14.5" cy="6.8" rx="1.8" ry="2.3"/><ellipse cx="18" cy="10" rx="1.8" ry="2.3"/><path d="M12.5 11.5c-2.6 0-5 3.2-5 5.4 0 1.6 1.2 2.4 2.6 2.1 1-.2 1.6-.6 2.4-.6s1.4.4 2.4.6c1.4.3 2.6-.5 2.6-2.1 0-2.2-2.4-5.4-5-5.4z"/></g></symbol>
+  <symbol id="r-family" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.5" r="2.5"/><path d="M4 21v-7a4 4 0 0 1 8 0v7"/><circle cx="17" cy="10" r="2"/><path d="M14 21v-4.5a3 3 0 0 1 6 0V21"/></g></symbol>
+  <symbol id="r-staff" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4h3l6 4V6L6 10z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></g></symbol>
+  <symbol id="r-ride" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9.5v4.5"/><circle cx="12" cy="16.6" r=".4" fill="currentColor"/></g></symbol>
+  <symbol id="r-shirt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5L4 6l-1.5 4.5 3.5 1.2V20.5h12V11.7l3.5-1.2L20 6l-5-2.5c-.5 1.4-1.6 2.2-3 2.2s-2.5-.8-3-2.2z"/></g></symbol>
+  <symbol id="i-arrow"viewBox="0 0 24 24"><path d="M12 4v14M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <main>
@@ -349,6 +376,23 @@ footer{background:#040c1f;border-top:1px solid rgba(255,211,115,.28);padding:34p
     </ul>
   </div>
 </section>
+
+<!-- ============ INFO & GUIDELINES ============ -->
+<section class="info" aria-labelledby="info-title">
+  <div class="wrap">
+    <div class="info-head"><h2 id="info-title"><span>מידע חשוב</span> והנחיות לקהל</h2></div>
+    <ul class="rules" role="list">
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-time"/></svg></span>הכניסה למתחם תתאפשר בהתאם לסבב שנבחר בעת רכישת הכרטיסים.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-shield"/></svg></span>הכניסה למתחם כפופה לבידוק ביטחוני.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-ban"/></svg></span>חל איסור על כניסה עם נשק ארוך.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-paw"/></svg></span>חל איסור על הכנסת בעלי חיים, למעט כלבי שירות.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-family"/></svg></span>ילדים נדרשים להיות בהשגחת מבוגר מלווה.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-staff"/></svg></span>יש להישמע להנחיות צוות ההפקה, האבטחה ומפעילי המתקנים.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-ride"/></svg></span>השימוש במתקנים בהתאם להנחיות הבטיחות של המפעילים.</li>
+      <li><span class="ic"><svg aria-hidden="true"><use href="#r-shirt"/></svg></span>מומלץ להגיע בלבוש נוח המתאים לפעילות תנועתית.</li>
+    </ul>
+  </div>
+</section>
 </main>
 
 
@@ -406,7 +450,7 @@ const TICKET_URL = '';
 
   /* scroll reveal: items that enter together appear one after another (top to bottom, right to left) */
   if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const items = document.querySelectorAll('.sec-title > *, .act, .gal-head, .gallery li');
+  const items = document.querySelectorAll('.sec-title > *, .act, .gal-head, .gallery li, .info-head, .rules li');
   const io = new IntersectionObserver(entries => {
     entries.filter(e => e.isIntersecting)
       .sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (b.boundingClientRect.left - a.boundingClientRect.left))
