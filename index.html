@@ -233,7 +233,8 @@ footer{background:#040c1f;border-top:1px solid rgba(255,211,115,.28);padding:34p
   .hero-photo .partners-top{position:absolute;top:18px;inset-inline:0;margin:auto;width:min(300px,70vw);z-index:1;
     filter:drop-shadow(0 2px 10px rgba(7,23,53,.7))}
   .hero-copy .partners{display:none}
-  .hero-copy{margin-top:-64px;position:relative}
+  .hero-copy{margin-top:-64px;position:relative;z-index:1}  /* text always paints above the photo it overlaps */
+  h1 .l1{text-shadow:0 2px 18px rgba(7,23,53,.55)}
   .dock{left:0;right:0;bottom:0;transform:translateY(110%);padding:22px var(--gut) calc(12px + env(safe-area-inset-bottom));
     background:none}
   .dock.on{transform:none}
