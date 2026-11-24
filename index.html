@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>חנוכה בפארק האלומיניום | יום שני 07/12 | היכל הקונכיה, באר שבע</title>
-<meta name="description" content="חנוכה בפארק האלומיניום, מיזם בידור ויצירה אינטראקטיבי לילדים ולמשפחות. יום שני 07/12 בהיכל הקונכיה, באר שבע. שני סבבים: 10:00–13:00 ו־16:00–19:00. מחיר מיוחד לתושבי באר שבע: 10 ₪.">
+<meta name="description" content="חנוכה בפארק האלומיניום, מיזם בידור ויצירה אינטראקטיבי לילדים ולמשפחות. יום שני 07/12 בהיכל הקונכיה, באר שבע. שני סבבים: 10:00–13:00 ו־16:00–19:00.">
 <meta name="theme-color" content="#123266">
 
 <!-- WhatsApp / Facebook / Open Graph.
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="he_IL">
 <meta property="og:site_name" content="חנוכה בפארק האלומיניום">
 <meta property="og:title" content="חנוכה בפארק האלומיניום · יום שני 07/12">
-<meta property="og:description" content="היכל הקונכיה, באר שבע · 10:00–13:00 | 16:00–19:00 · מחיר מיוחד לתושבי באר שבע: 10 ₪">
+<meta property="og:description" content="היכל הקונכיה, באר שבע · 10:00–13:00 | 16:00–19:00">
 <meta property="og:url" content="https://hanukkah-beersheva.vercel.app/">
 <meta property="og:image" content="https://hanukkah-beersheva.vercel.app/assets/og-image.jpg">
 <meta property="og:image:secure_url" content="https://hanukkah-beersheva.vercel.app/assets/og-image.jpg">
@@ -191,6 +191,25 @@ footer{background:#040c1f;border-top:1px solid rgba(255,211,115,.28);padding:34p
   .hero-photo{animation:fade 1.2s ease both}
   @keyframes up{from{opacity:0;transform:translateY(18px)}}
   @keyframes fade{from{opacity:0;transform:scale(1.03)}}
+
+  /* scroll reveal: JS adds .rv to <html> and .in to each item as it enters the screen (staggered via --d) */
+  .rv .sec-title > *, .rv .act, .rv .act img, .rv .act h3, .rv .act p, .rv .gal-head h2, .rv .gallery li{
+    transition:opacity .8s ease, transform 1s cubic-bezier(.2,.75,.2,1), filter .8s ease;transition-delay:var(--d,0s)}
+  .rv .sec-title > *{opacity:0;transform:translateY(32px)}
+  .rv .sec-title h2{transform:translateY(36px) scale(.94)}
+  .rv .act{opacity:0;transform:translateY(46px) scale(.95)}
+  .rv .act img{transform:scale(.55) rotate(-18deg);transition:transform 1.1s cubic-bezier(.3,1.45,.45,1);
+    transition-delay:calc(var(--d,0s) + .12s)}
+  .rv .act h3, .rv .act p{opacity:0;transform:translateY(12px);transition-delay:calc(var(--d,0s) + .3s)}
+  .rv .act p{transition-delay:calc(var(--d,0s) + .4s)}
+  .rv .gal-head::before, .rv .gal-head::after{transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.75,.2,1) .15s}
+  .rv .gal-head::before{transform-origin:left}.rv .gal-head::after{transform-origin:right}
+  .rv .gal-head h2{opacity:0;transform:translateY(24px) scale(.9)}
+  .rv .gallery li{opacity:0;transform:translateY(44px) scale(.92);filter:blur(8px)}
+  .rv .sec-title > .in, .rv .sec-title h2.in, .rv .act.in, .rv .act.in img, .rv .act.in h3, .rv .act.in p,
+  .rv .gal-head.in h2, .rv .gallery li.in{opacity:1;transform:none;filter:none}
+  .rv .gal-head.in::before, .rv .gal-head.in::after{transform:none}
+  .rv .act.in:hover{transform:translateY(-4px);transition-delay:0s}
 }
 
 /* ---------- responsive ---------- */
@@ -381,6 +400,17 @@ const TICKET_URL = '';
   addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(sync); }, {passive: true});
   addEventListener('resize', sync);
   sync();
+
+  /* scroll reveal: items that enter together appear one after another (top to bottom, right to left) */
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const items = document.querySelectorAll('.sec-title > *, .act, .gal-head, .gallery li');
+  const io = new IntersectionObserver(entries => {
+    entries.filter(e => e.isIntersecting)
+      .sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (b.boundingClientRect.left - a.boundingClientRect.left))
+      .forEach((e, k) => { e.target.style.setProperty('--d', (k * .09).toFixed(2) + 's'); e.target.classList.add('in'); io.unobserve(e.target); });
+  }, {rootMargin: '0px 0px -8% 0px', threshold: .12});
+  document.documentElement.classList.add('rv');
+  items.forEach(el => io.observe(el));
 })();
 </script>
 </body>
